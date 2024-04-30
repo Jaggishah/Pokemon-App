@@ -1,2 +1,6 @@
 # Pokemon-App
-Our project leverages cutting-edge technologies such as React, Redux Toolkit, Typescript, Firebase, and SCSS to create a dynamic and efficient web application. 
+Our project leverages cutting-edge technologies such as React, Redux Toolkit, Typescript, Firebase, and SCSS to create a dynamic and efficient web application.Our project leverages cutting-edge technologies such as React, Redux Toolkit, Typescript, Firebase, and SCSS to create a dynamic and efficient web application. With React as our frontend framework, we ensure a highly responsive and interactive user interface, enhancing user experience. Redux Toolkit facilitates state management, enabling seamless data flow and robust application architecture. Typescript brings type safety and enhanced code maintainability, improving overall development efficiency and reducing bugs.
+
+We utilize Firebase for backend services, enabling real-time data synchronization, authentication, and hosting, ensuring scalability and reliability. SCSS enhances our styling capabilities, allowing for modular and maintainable CSS code, resulting in visually appealing and consistent designs across the application.
+
+Through the integration of these technologies, our project aims to deliver a modern, scalable, and user-centric web application that meets the evolving needs of our users while maintaining high standards of performance and security.
