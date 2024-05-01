@@ -1,9 +1,9 @@
 import React from 'react'
 
-const Wrapper = () => {
+const Wrapper = (Component:React.FC) => () => {
   return (
-    <div>
-      Wrapper
+    <div className='content'>
+      <Component/>
     </div>
   )
 }
