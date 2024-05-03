@@ -1,6 +1,7 @@
 export interface AppTypeInitialState {
     toasts : string[];
     userInfo: undefined | { email: string};
+    currentPokemontab : string;
 }
 
 export interface PokemonTypeInitialState{
@@ -8,8 +9,18 @@ export interface PokemonTypeInitialState{
     randomPokemons: undefined | generatedPokemonType[];
     compareQueue:generatedPokemonType[];
     userPokemons: userPokemonTypes[];
+    currentPokemon:currentPokemonType | undefined
 }
-
+export interface currentPokemonType{
+    id :number,
+    name: string,
+    types: pokemonTypeInterface[];
+    stats: pokemonStatsType[];
+    encounters: string[];
+    evolutionLevel: number;
+    evolution: { level: number; pokemon: { name: string; url: string } }[];
+    pokemonAbilities: { abilities: string[]; moves: string[] };
+}
 
 export interface genericPokemonType{
     name: string;

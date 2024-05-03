@@ -1,16 +1,21 @@
 import React, { useEffect, useCallback } from "react";
 import Wrapper from "../sections/Wrapper";
 import { useParams } from "react-router-dom";
-import { useAppDispatch } from "../app/hooks";
+import { useAppDispatch, useAppSelector } from "../app/hooks";
 import axios from "axios";
-import { pokemonsRoute, pokemonSpeciesRoute } from "../utils/Constants";
+import { pokemonsRoute, pokemonSpeciesRoute, pokemonTabs } from "../utils/Constants";
 import { defaultImages, images } from "../utils/getPokemonImages";
 import { extractColors } from "extract-colors";
+import Description from "./PokemonPages/Description";
+import Evolution from "./PokemonPages/Evolution";
+import CapableMoves from "./PokemonPages/CapableMoves";
+import Location from "./PokemonPages/Location";
+import { setCurrentPokemon } from "../app/slices/PokemonSlice";
 
 function Pokemon() {
   const params = useParams();
   const dispatch = useAppDispatch();
-
+  const { currentPokemontab } =useAppSelector(({ app}) => app)
   const getRecursiveEvolution: any = useCallback(
     (evolutionChain: any, level: number, evolutionData: any) => {
       if (!evolutionChain.evolves_to.length) {
@@ -82,7 +87,7 @@ function Pokemon() {
       const evolutionLevel = evolution.find(
         ({ pokemon }) => pokemon.name === data.name
       ).level;
-      console.log({
+      dispatch(setCurrentPokemon({
         id: data.id,
         name: data.name,
         types: data.types.map(
@@ -105,7 +110,7 @@ function Pokemon() {
         evolutionLevel,
         evolution,
         pokemonAbilities,
-      });
+      }));
     },
     [getEvolutionData, params.id]
   );
@@ -140,7 +145,21 @@ function Pokemon() {
     getPokemonInfo(imageElemet.src);
   }, [params, getPokemonInfo]);
 
-  return <div>Pokemon</div>;
+  return <div>
+    {
+      currentPokemontab === pokemonTabs.description && <Description/>
+    }
+    {
+      currentPokemontab === pokemonTabs.evolution && <Evolution/>
+    }
+    {
+      currentPokemontab === pokemonTabs.moves && <CapableMoves/>
+    }
+     {
+      currentPokemontab === pokemonTabs.locations && <Location/>
+    }
+    
+    </div>;
 }
 
 export default Wrapper(Pokemon);
