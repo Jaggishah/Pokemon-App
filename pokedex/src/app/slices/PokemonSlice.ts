@@ -2,6 +2,8 @@ import { createSlice } from "@reduxjs/toolkit"
 import { PokemonTypeInitialState, generatedPokemonType } from "../../utils/Types"
 import { getInitialpokemonData } from "../reducers/getinitialData";
 import { getPokemonData } from "../reducers/getPokemonData";
+import { getUserPokemons } from "../reducers/getuserPokemon";
+import { removePokemonFromUserList } from "../reducers/removePokemonFromUserList";
 
 
 
@@ -42,7 +44,19 @@ export const PokemonSlice = createSlice({
         })
         builder.addCase(getPokemonData.fulfilled, (state,action) => {
             state.randomPokemons = action.payload
+        });
+        builder.addCase(getUserPokemons.fulfilled,(state,action) =>{
+            //@ts-ignore
+            state.userPokemons = action.payload
         })
+        builder.addCase(removePokemonFromUserList.fulfilled, (state, action) => {
+            const userPokemons = [...state.userPokemons];
+            const index = userPokemons.findIndex(
+              (pokemon) => pokemon.firebaseId === action.payload?.id
+            );
+            userPokemons.splice(index, 1);
+            state.userPokemons = userPokemons;
+          });
     }
 });
 

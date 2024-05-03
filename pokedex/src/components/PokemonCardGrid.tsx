@@ -6,6 +6,8 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { useAppDispatch } from '../app/hooks';
 import { addToCompare } from '../app/slices/PokemonSlice';
 import { setToast } from '../app/slices/AppSlice';
+import { addPokemonToList } from '../app/reducers/addPokemonToList';
+import { removePokemonFromUserList } from '../app/reducers/removePokemonFromUserList';
 
 const PokemonCardGrid = ({pokemons}:{ pokemons :userPokemonTypes[]}) => {
     const location = useLocation();
@@ -23,10 +25,14 @@ const PokemonCardGrid = ({pokemons}:{ pokemons :userPokemonTypes[]}) => {
                         <div className="pokemon-card-list">
                             {location.pathname.includes("/pokemon") || 
                              location.pathname.includes("/search") ? (
-                                <FaPlus className='plus'/>
+                                <FaPlus className='plus' onClick={() => dispatch(addPokemonToList(data))}/>
                             ) : 
                                 (
-                                    <FaTrash className='trash'/>
+                                    <FaTrash className='trash'
+                                    onClick={ async () => { 
+                                        await dispatch(removePokemonFromUserList({id:data.firebaseId!}))
+                                        dispatch(setToast("Pokemon removed Succesfully"))
+                                }}/>
                                 )
                             }
                         </div>

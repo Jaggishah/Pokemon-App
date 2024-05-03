@@ -23,9 +23,16 @@ export const addPokemonToList = createAsyncThunk("pokemon/addPokemon", async (po
         });
         if ( index === -1){
             let types: string[] = [];
-            types = pokemon.types as string[];
+            if(!pokemon.stats){
+                pokemon.types.forEach((type :any) => 
+                types.push(Object.keys(type).toString()))
+            }else{
+                types = pokemon.types as string[]
+            }
+
             await addDoc(pokemonListRef,{
-                pokemon : {id:pokemon.id,name:pokemon.name,types}
+                pokemon : {id:pokemon.id,name:pokemon.name,types},
+                email: userInfo.email
             })
 
             return dispatch(setToast(`${pokemon.name} added to your collection.`))

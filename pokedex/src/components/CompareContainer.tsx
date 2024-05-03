@@ -10,6 +10,7 @@ import {
   pokemonTypeInterface,
   userPokemonTypes,
 } from "../utils/Types";
+import { addPokemonToList } from "../app/reducers/addPokemonToList";
 function CompareContainer({
   pokemon = undefined,
   isEmpty = false,
@@ -138,7 +139,7 @@ function CompareContainer({
             <button
               className="compare-btn"
               onClick={() => {
-                // dispatch(addPokemonToList(pokemon));
+                dispatch(addPokemonToList(pokemon));
                 console.log("Add")
               }}
             >
